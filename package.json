@@ -1,0 +1,35 @@
+{
+  "name": "@cheevr/metrics",
+  "version": "1.0.0",
+  "description": "A metrics module that allows to easily send data to various backends",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Cheevr/Metrics.git"
+  },
+  "keywords": [
+    "metrics",
+    "kibana",
+    "newrelic"
+  ],
+  "author": "Ravi Gairola <ravi@cheevr.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Cheevr/Metrics/issues"
+  },
+  "scripts": {
+    "test": "istanbul cover _mocha -- --recursive",
+    "test-travis": "istanbul cover _mocha --report lcovonly -- -R spec --recursive"
+  },
+  "dependencies": {
+    "@cheevr/config": "^1",
+    "@cheevr/database": "^1",
+    "@cheevr/logging": "^1"
+  },
+  "devDependencies": {
+    "chai": "^3",
+    "coveralls": "^2",
+    "istanbul": "^0.4",
+    "mocha": "^3"
+  }
+}

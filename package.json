@@ -24,7 +24,16 @@
   "dependencies": {
     "@cheevr/config": "^1",
     "@cheevr/database": "^1",
-    "@cheevr/logging": "^1"
+    "@cheevr/logging": "^1",
+    "@cheevr/tasks": "^1",
+    "flat": "^2",
+    "geoip-lite": "^1",
+    "lodash": "^4",
+    "shortid": "^2"
+  },
+  "peerDependencies": {
+    "@newrelic/native-metrics": "^2",
+    "newrelic": "^1"
   },
   "devDependencies": {
     "chai": "^3",

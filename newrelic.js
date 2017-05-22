@@ -11,7 +11,7 @@ if (!fs.existsSync(path.join(process.cwd(), 'newrelic.js'))) {
 
 class NewRelic {
     constructor(config, log) {
-        this._enabled = config.enabled;
+        this._enabled = config.enabled === undefined ? true: config.enabled;
         this._config = config;
         this._log = log;
     }
@@ -27,8 +27,11 @@ class NewRelic {
     consume(metrics) {
         metrics = flat(metrics);
         for (let prop in metrics) {
-            let key = prop[prop.lastIndexOf('.')] = '/';
-            newrelic.recordMetrics('Custom/' + key, metrics[prop]);
+            let index = prop.lastIndexOf('.');
+            if (index > -1) {
+                prop = prop.substr(0, index) + '/' + prop.substr(index + 1);
+            }
+            newrelic.recordMetric('Custom/' + prop, metrics[prop]);
         }
     }
 }

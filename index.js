@@ -2,11 +2,8 @@ const _ = require('lodash');
 const config = require('@cheevr/config').addDefaultConfig(__dirname, 'config');
 const Logging = require('@cheevr/logging');
 const path = require('path');
-const shortId = require('shortid');
 
 
-// Regex safe short ids
-shortId.characters('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@_');
 const hostname = require('os').hostname();
 const application = path.basename(path.dirname(require.main.filename));
 
@@ -18,20 +15,21 @@ class Metrics {
     /**
      * Uses the given configuration to set up the metrics collection system. Setting a provider will automatically
      * enable metrics collection if it has been manually disabled before.
-     * @param metricsConfig
+     * @param {Object} metricsConfig
      */
     set provider(metricsConfig) {
         metricsConfig = _.defaultsDeep(metricsConfig, config.defaults.metrics[metricsConfig.type]);
         this._log = Logging[config.logger];
-        this._sink = new require('./' + metricsConfig.type)(metricsConfig, this._log);
+        let Provider = require('./' + metricsConfig.type);
+        this._provider = new Provider(metricsConfig, this._log);
     }
 
     set enabled(enabled) {
-        this._sink.enabled = enabled;
+        this._provider.enabled = enabled;
     }
 
     get enabled() {
-        return this._sink.enabled;
+        return this._provider.enabled;
     }
 
     /**
@@ -41,12 +39,11 @@ class Metrics {
      * @param {ServerResponse} res
      * @param {function} next
      */
-    async middleware(req, res, next) {
-        if (!this._sink.enabled) {
+    middleware(req, res, next) {
+        if (!module.exports._provider.enabled) {
             return next();
         }
         let startTime = process.hrtime();
-        req.id = req.get('id') || shortId.generate();
         req.metrics = {
             '@timestamp': new Date(),
             process: process.pid,
@@ -66,8 +63,9 @@ class Metrics {
             let size = req.socket.bytesWritten;
             req.args && (req.metrics.request.args = req.args);
             req.metrics.request.size = req.socket.bytesRead;
+            req.metrics.tackingId = req.id;
             req.metrics.response = { status, size, time };
-            this._sink.consume(req.metrics);
+            module.exports._provider.consume(req.metrics);
         });
         next();
     }

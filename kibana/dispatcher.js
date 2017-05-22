@@ -1,16 +1,21 @@
+const _ = require('lodash');
 const config = require('@cheevr/config').addDefaultConfig(__dirname, '../config');
 const Database = require('@cheevr/database');
 const geoip = require('geoip-lite');
 const Logger = require('@cheevr/logging');
 
 
-const index = config.kibana.index;
-const defaultType = config.kibana.type;
+const kibanaConfig = _.defaultsDeep(config.metrics, config.defaults.metrics[config.metrics.type]);
+const index = kibanaConfig.index;
+const defaultType = kibanaConfig.type;
 const bulkSize = 100;
 const buffer = [];
-const log = Logger[config.metrics.logger];
-const db = Database.factory('kibana');
+const log = Logger[kibanaConfig.logger];
+const db = Database.factory(kibanaConfig.database);
 
+/**
+ * The method that will be called by the task runner.
+ */
 module.exports = exports = Runner => {
     Runner.job({
         name: 'Metrics Exporter',

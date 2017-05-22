@@ -1,6 +1,6 @@
 {
   "name": "@cheevr/metrics",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A metrics module that allows to easily send data to various backends",
   "main": "index.js",
   "repository": {
@@ -38,7 +38,10 @@
   "devDependencies": {
     "chai": "^3",
     "coveralls": "^2",
+    "express": "^4.15.2",
+    "gently": "^0.10.0",
     "istanbul": "^0.4",
-    "mocha": "^3"
+    "mocha": "^3",
+    "supertest": "^3.0.0"
   }
 }

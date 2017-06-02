@@ -11,7 +11,7 @@ const request = require('supertest');
 
 describe('Metrics', () => {
     it('should log metrics from a request to database', done => {
-        Metrics.provider = { type: 'test/provider.mock' };
+        Metrics.provider = { type: 'test/provider.mock', enabled: true };
         const app = express();
         app.use(Metrics.middleware);
         app.get('/', (req, res) => res.end());

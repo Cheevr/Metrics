@@ -1,6 +1,8 @@
 test/
 coverage/
 logs/
+.idea/
 .travis.yml
 .nyc_coverage/
 .gitignore
+.npmignore

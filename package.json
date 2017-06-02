@@ -19,7 +19,7 @@
   },
   "scripts": {
     "test": "nyc --reporter=text --reporter=html mocha --recursive",
-    "test-travis": "nyc --reporter=text-lcov mocha --recursive | coveralls"
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {
     "@cheevr/config": "^1",

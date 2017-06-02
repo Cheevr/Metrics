@@ -4,9 +4,8 @@ npm-debug.log*
 pids
 *.pid
 *.seed
-# Dependency directories
-# Optional npm cache directory
 .npm
 .node_repl_history
 coverage/
 node_modules/
+.nyc_output/

@@ -1,6 +1,6 @@
 {
   "name": "@cheevr/metrics",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A metrics module that allows to easily send data to various backends",
   "main": "index.js",
   "repository": {
@@ -18,12 +18,12 @@
     "url": "https://github.com/Cheevr/Metrics/issues"
   },
   "scripts": {
-    "test": "istanbul cover _mocha -- --recursive",
-    "test-travis": "istanbul cover _mocha --report lcovonly -- -R spec --recursive"
+    "test": "nyc --reporter=text --reporter=html mocha --recursive",
+    "test-travis": "nyc --reporter=text-lcov mocha --recursive | coveralls"
   },
   "dependencies": {
     "@cheevr/config": "^1",
-    "@cheevr/database": "^1",
+    "@cheevr/database": "^1.1.11",
     "@cheevr/logging": "^1",
     "@cheevr/tasks": "^1",
     "flat": "^2",
@@ -38,10 +38,10 @@
   "devDependencies": {
     "chai": "^3",
     "coveralls": "^2",
-    "express": "^4.15.2",
+    "express": "^4.15.3",
     "gently": "^0.10.0",
-    "istanbul": "^0.4",
-    "mocha": "^3",
+    "mocha": "^3.4.2",
+    "nyc": "^11",
     "supertest": "^3.0.0"
   }
 }

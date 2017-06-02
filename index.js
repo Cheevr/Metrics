@@ -19,6 +19,9 @@ class Metrics {
      */
     set provider(metricsConfig) {
         metricsConfig = _.defaultsDeep(metricsConfig, config.defaults.metrics[metricsConfig.type]);
+        if (!metricsConfig.enabled) {
+            return;
+        }
         this._log = Logging[config.logger];
         let Provider = require('./' + metricsConfig.type);
         this._provider = new Provider(metricsConfig, this._log);

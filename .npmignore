@@ -1,0 +1,6 @@
+test/
+coverage/
+logs/
+.travis.yml
+.nyc_coverage/
+.gitignore

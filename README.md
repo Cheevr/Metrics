@@ -101,10 +101,10 @@ req.metrics = {
 
 ## Metrics.provider {object}
 
-Writeonly property that allows to set the configuration at runtime. If the module has been disabled, calling this
-method will enable it again, so take care that about that side effect. To see details about the configuration
-check out the [Configuration](#Configuration) section below. When passing in a configuration you should not nest it
-under a **metrics** property:
+Writeonly property that allows to set the configuration at runtime. Note that the enabled flag will overwrite
+any runtime settings, so if you set enabled to false before you should do it again here, otherwise the provider
+will be enabled by default To see details about the configuration check out the [Configuration](#Configuration)
+section below. When passing in a configuration you should not nest it under a **metrics** property:
 
 ```JavaScript
 const Metrics = require('@cheevr/metrics'):

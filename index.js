@@ -13,8 +13,8 @@ class Metrics {
     }
 
     /**
-     * Uses the given configuration to set up the metrics collection system. Setting a provider will automatically
-     * enable metrics collection if it has been manually disabled before.
+     * Uses the given configuration to set up the metrics collection system. In case metrics were disabled
+     * before, this setting will be overridden if not also disabled in the passed in config.
      * @param {Object} metricsConfig
      */
     set provider(metricsConfig) {

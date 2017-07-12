@@ -132,11 +132,25 @@ messages.
 
 ## Kibana
 
-//TODO explain @cheevr/database usage
+This implementation uses the [@cheevr/database](https://github.com/cheevr/database) and
+[@cheevr/config](https://github.com/cheevr/config) for its endpoint configuration. This implementation does not
+support direct storing of metrics and will only work with metrics recorded on the **req.metrics** object.
+Check out the [Express Example](#express-eample) on how to configure the database connection. If not differently
+configured the database referenced by Kibana is the default database specified in database section of the config
+(again check [@cheevr/database](https://github.com/cheevr/database) for details).
+
+If you're not configuring anything the default database for Kibana will be used and data collection should work
+out of the box (assuming the default database instance points to a running Elasticsearch cluster).
 
 ## New Relic
 
-// TODO explain newrelic config file
+New relic relies on a configuration file to specify projects and endpoints. You will have to add a **newrelic.js**
+file to your root directory. For more information check out the
+[New Relic Docs](https://docs.newrelic.com/docs/agents/nodejs-agent/installation-configuration/install-nodejs-agent).
+The newrelic libraries (including ```@newrelic/native-metrics```) is already part of this module, so you don't have
+to include them again. All the basic functionality of New Relic is still available and you can record metrics through
+their standard APIs.
+
 
 # Future Features for Consideration
 
